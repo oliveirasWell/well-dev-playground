@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@oliveiras-well/shared": [ "./packages/shared/src/index.js" ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
