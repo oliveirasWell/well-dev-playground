@@ -87,9 +87,7 @@
     "analyze": "npx source-map-explorer 'build/static/js/*.js'",
     "build:docs:html": "documentation --github --config documentation.yml --babel=./babel.config.js build packages/* -f html -o docs",
     "build:docs:md": "documentation --github --config documentation.yml --babel=./babel.config.js packages/* src/* -f md > md-docs/README.md",
-    "dev": "rollup -c -w",
     "hooks": "bash .git/hooks/pre-commit",
-    "jest:lint": "jest --config jest-eslint.config.js",
     "lint:staged": "lint-staged",
     "test": "jest --coverage",
     "web:start": "yarn workspace well-dev-playground-react-ui start",
@@ -99,7 +97,6 @@
   },
   "workspaces": {
     "packages": [
-      "packages/react-ui",
       "packages/*"
     ]
   }

@@ -11,11 +11,21 @@ import PropTypes from 'prop-types';
  */
 const textToUpper = text => text && text.toUpperCase();
 
-export const Alert = ({ text = 'Alerta' }) => (
-  <div style={{ backgroundColor: 'red' }}>{textToUpper(text)}</div>
-);
+const style = { backgroundColor: 'red' };
+
+export const Alert = ({ text = 'Alerta', onClick: onClickInput, index }) => {
+  const onClick = () => onClickInput(index);
+
+  return (
+    <div style={style} onClick={onClick} onKeyDown={() => {}}>
+      {textToUpper(text)}
+    </div>
+  );
+};
 
 Alert.propTypes = {
   /* text input  */
   text: PropTypes.string,
+  /* onClick  function */
+  onClick: PropTypes.func,
 };

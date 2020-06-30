@@ -1,8 +1,8 @@
 import { lazy } from 'react';
-// import Home from '../screens/Home/Home';
+// import List from '../pages/List/List';
 
-const Home = lazy(() => import('../screens/Home/Home'));
-const List = lazy(() => import('../screens/List/List'));
+const List = lazy(() => import('../pages/List/List'));
+const Home = lazy(() => import('../pages/Home/Home'));
 
 export const routes = {
   HOME: {
@@ -25,7 +25,7 @@ export const routes = {
   },
   LIST_ITEM: {
     path: '/listItem/:id',
-    title: 'List',
+    title: 'ListItem',
     menu: true,
     component: List,
     redirect(history, id) {

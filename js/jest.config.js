@@ -3,6 +3,7 @@ module.exports = {
   coverageDirectory: '.jest-coverage',
   coveragePathIgnorePatterns: [
     '<rootDir>/packages/(?:.+?)/lib/',
+    '<rootDir>/packages/(?:.+?)/node_modules/',
     '<rootDir>/node_modules/',
   ],
   coverageReporters: ['html', 'text'],
@@ -21,6 +22,7 @@ module.exports = {
   testPathIgnorePatterns: [
     '<rootDir>/packages/(?:.+?)/lib/',
     '<rootDir>/packages/(?:.+?)/node_modules/',
+    '<rootDir>/cypress/',
     '\\*.(css|jpg|png|scss|less|sass)$',
   ],
   setupFilesAfterEnv: ['<rootDir>/jest-setup.js'],
