@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { AlertContext } from '../context/Alert/AlertContext';
 import { MarvelCharactersApiService } from '../services/MarvelCharactersApiService';
+import { PAGE_SIZE } from '../constants/apiConstants';
 
 export function useCharactersPaginate({ nameStartsWith }) {
   const { addAlert } = React.useContext(AlertContext);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState(undefined);
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
   const [error, setErros] = useState(undefined);
@@ -13,7 +14,7 @@ export function useCharactersPaginate({ nameStartsWith }) {
   useEffect(() => {
     if (nameStartsWith) {
       setLoading(true);
-      MarvelCharactersApiService.getPaginated(nameStartsWith, page, 10)
+      MarvelCharactersApiService.getPaginated(nameStartsWith, page, PAGE_SIZE)
         .then(response => {
           setTotal(response?.total);
           setResults(response?.results || []);

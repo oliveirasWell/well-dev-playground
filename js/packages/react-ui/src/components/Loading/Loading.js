@@ -1,5 +1,6 @@
 import React from 'react';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
-const Loading = () => <div data-testid="loading"> Loading </div>;
+const Loading = () => <LinearProgress data-testid="loading" />;
 
 export { Loading };

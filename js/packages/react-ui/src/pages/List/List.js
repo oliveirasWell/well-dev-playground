@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 import { useComicsPaginate } from '../../hooks/useComicsPaginate';
 import { LoadingTernary } from '../../components/LoadingTernary';
 import { routes } from '../../routes/routes';
-import { GenericInput } from '../../components/GenericInput';
-
-const style = { maxWidth: '50px' };
-const style1 = { backgroundColor: 'lightGrey' };
+import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { ComicCard } from './Card/ComicCard';
+import { PaginationHeader } from '../../components/PaginationHeader/PaginationHeader';
 
 const List = () => {
   const history = useHistory();
@@ -49,59 +49,62 @@ const List = () => {
     );
   }, [results, filter]);
 
+  const _handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleChangeInput(e);
+    }
+  };
+
+  const clearSearch = () => {
+    setFilter('');
+  };
+
   return (
-    <>
-      <div id="item-header">
-        <GenericInput
-          handleChangeInput={handleChangeInput}
-          defaultValue=""
-          buttonText="Search"
+    <Grid container spacing={0}>
+      <Grid item xs={12} xl={6} md={6} id="item-header">
+        <SearchBar
+          value={filter}
+          onChange={handleChangeInput}
+          onKeyDown={_handleKeyDown}
+          onSearchClick={() => {}}
+          onCleanClick={clearSearch}
           placeholder="Search for character, comic name, or author"
         />
-
-        <div>{`Total ${total}`}</div>
-        {comics && (
-          <>
-            {page !== 0 && (
-              <button type="button" onClick={getPrevious}>
-                Previous
-              </button>
-            )}
-            {page !== total && (
-              <button type="button" onClick={getNext}>
-                Next
-              </button>
-            )}
-          </>
-        )}
-      </div>
-      <LoadingTernary loading={loading}>
-        <div id="body-comic">
-          {!loading &&
-            (comics || []).map(comic => (
-              <div key={`${comic.id}`} style={style1}>
-                <h3>{comic.title}</h3>
-                <img
-                  src={`${comic?.thumbnail?.path}.${comic?.thumbnail?.extension}`}
-                  alt="thumbnail"
-                  style={style}
-                />
-                <div>
-                  {(comic?.creators?.items ?? []).map(({ name }) => (
-                    <span key={`${comic.id}*${name}`}>{name}</span>
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => routes.DETAILS.redirect(history, comic.id)}
-                >
-                  Details
-                </button>
-              </div>
-            ))}
-        </div>
-      </LoadingTernary>
-    </>
+      </Grid>
+      <Grid item xs={12} xl={6} md={6} id="item-header">
+        <PaginationHeader
+          results={comics}
+          page={page}
+          total={total}
+          getPrevious={getPrevious}
+          getNext={getNext}
+          totalText="comics"
+        />
+      </Grid>
+      <Grid item xs={12} xl={12} md={12} id="item-header">
+        <LoadingTernary loading={loading}>
+          <Grid container spacing={0}>
+            {!loading &&
+              (comics || []).map(comic => (
+                <Grid item xs={12} xl={4} md={4} key={`${comic.id}`}>
+                  <ComicCard
+                    title={comic.title}
+                    authors={(comic?.creators?.items ?? [])
+                      .map(({ name }) => name)
+                      .join(', ')}
+                    imageSrc={`${comic?.thumbnail?.path}.${comic?.thumbnail?.extension}`}
+                    onClick={() => routes.DETAILS.redirect(history, comic.id)}
+                    description={comic?.description}
+                    format={comic?.format}
+                    images={comic?.images}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+        </LoadingTernary>
+      </Grid>
+    </Grid>
   );
 };
 

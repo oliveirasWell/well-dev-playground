@@ -30,7 +30,7 @@ export const routes = {
   },
   ADVANCED_SEARCH: {
     path: '/search',
-    title: 'Search',
+    title: 'Character Search',
     menu: true,
     exact: true,
     component: AdvancedSearch,

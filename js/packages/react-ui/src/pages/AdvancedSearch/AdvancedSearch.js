@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import Grid from '@material-ui/core/Grid';
 import { useCharactersPaginate } from '../../hooks/useCharactersPaginate';
 import { LoadingTernary } from '../../components/LoadingTernary';
-import { GenericInput } from '../../components/GenericInput';
-
-const style1 = { backgroundColor: 'lightGrey' };
+import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { PaginationHeader } from '../../components/PaginationHeader/PaginationHeader';
+import { CharacterTable } from './CharacterTable/CharacterTable';
 
 const AdvancedSearch = () => {
   const [nameStartsWith, setNameStartsWith] = useState(undefined);
@@ -26,45 +27,47 @@ const AdvancedSearch = () => {
     getPrevious,
   } = useCharactersPaginate({ nameStartsWith: searchNameStartsWith });
 
+  const _handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleChangeInput(e);
+      handleClickInput();
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchNameStartsWith('');
+    setNameStartsWith('');
+  };
+
   return (
-    <>
-      <h1>Advanced Search</h1>
-      <>
-        <GenericInput
-          handleClickInput={handleClickInput}
-          handleChangeInput={handleChangeInput}
-          defaultValue={nameStartsWith}
-          buttonText="Search!"
+    <Grid container spacing={0}>
+      <Grid item xs={12} xl={6} md={6} id="item-header">
+        <SearchBar
+          value={nameStartsWith}
+          onChange={handleChangeInput}
+          onKeyDown={_handleKeyDown}
+          onSearchClick={handleClickInput}
+          onCleanClick={clearSearch}
+          placeholder="Search for a character"
         />
-        <div id="item-header">
-          <div>{`Total ${total}`}</div>
-          {characters && (
-            <>
-              {page !== 0 && (
-                <button type="button" onClick={getPrevious}>
-                  Previous
-                </button>
-              )}
-              {page !== total && (
-                <button type="button" onClick={getNext}>
-                  Next
-                </button>
-              )}
-            </>
-          )}
-        </div>
+      </Grid>
+      <Grid item xs={12} xl={6} md={6} id="item-header">
+        <PaginationHeader
+          results={characters}
+          page={page}
+          total={total}
+          getPrevious={getPrevious}
+          getNext={getNext}
+          totalText="Characters"
+        />
+      </Grid>
+      <Grid item xs={12} xl={12} md={12} id="item-header">
         <LoadingTernary loading={loading}>
-          <div id="body-comic">
-            {!loading &&
-              (characters || []).map(character => (
-                <div key={character.id} style={style1}>
-                  <h3>{character.name}</h3>
-                </div>
-              ))}
-          </div>
+          <CharacterTable results={characters} />
         </LoadingTernary>
-      </>
-    </>
+      </Grid>
+    </Grid>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AlertContext } from '../context/Alert/AlertContext';
 import { MarvelComicsApiService } from '../services/MarvelComicsApiService';
+import { PAGE_SIZE } from '../constants/apiConstants';
 
 export function useComicsPaginate() {
   const { addAlert } = React.useContext(AlertContext);
@@ -12,7 +13,7 @@ export function useComicsPaginate() {
 
   useEffect(() => {
     setLoading(true);
-    MarvelComicsApiService.getPaginated(page, 10)
+    MarvelComicsApiService.getPaginated(page, PAGE_SIZE)
       .then(response => {
         setTotal(response?.total);
         setResults(response?.results);

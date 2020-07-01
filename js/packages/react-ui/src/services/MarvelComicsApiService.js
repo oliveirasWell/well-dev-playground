@@ -1,7 +1,7 @@
 import { isRequired } from '@oliveiras-well/es-shared';
-import { ROOT_MARVEL_API_URL } from '../constants/apiConstants';
+import { PAGE_SIZE, ROOT_MARVEL_API_URL } from '../constants/apiConstants';
 
-const getComicList = ({ page = 0, limit = 20 }) =>
+const getComicList = ({ page = 0, limit = PAGE_SIZE }) =>
   `${ROOT_MARVEL_API_URL}/comics?limit=${limit}&offset=${page * limit}&apikey=${
     process.env.REACT_APP_API_PUBLIC_KEY
   }`;

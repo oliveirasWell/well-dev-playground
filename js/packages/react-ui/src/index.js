@@ -1,17 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import App from './App';
+import * as Sentry from '@sentry/browser';
+import 'typeface-roboto';
+import { ThemeProvider } from '@material-ui/core/styles';
+import App from './pages/App/App';
 import * as serviceWorker from './serviceWorker';
 import { AlertContextProvider } from './context/Alert/AlertContextProvider';
+import theme from './utils/theme';
+import './index.css';
+
+Sentry.init({
+  dsn: process.env.REACT_APP_SENTRY_TOKEN,
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <AlertContextProvider>
-      <Router>
-        <App />
-      </Router>
-    </AlertContextProvider>
+    <ThemeProvider theme={theme}>
+      <AlertContextProvider>
+        <Router>
+          <App />
+        </Router>
+      </AlertContextProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
