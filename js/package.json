@@ -39,6 +39,7 @@
     "eslint-plugin-no-inline-styles": "^1.0.5",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.20.0",
+    "firebase-tools": "^8.4.3",
     "get-yarn-workspaces": "^1.0.2",
     "husky": "^4.2.5",
     "jest": "24.9.0",
@@ -92,6 +93,7 @@
     "lint:staged": "lint-staged",
     "test": "jest --coverage",
     "web:start": "yarn workspace well-dev-playground-react-ui start",
+    "web:firebase:deploy": "yarn workspace well-dev-playground-react-ui build && firebase deploy",
     "app:android:start": "yarn workspace well-dev-playground-app start:android",
     "app:ios:start": "yarn workspace well-dev-playground-app start:ios",
     "start:server": "yarn workspace well-dev-playground-server start"
