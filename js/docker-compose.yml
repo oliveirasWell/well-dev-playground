@@ -1,17 +1,18 @@
 version: '3'
 services:
   app:
-    container_name: dockerized-ui-kit
+    container_name: dockerized-react-ui
     stdin_open: true
-    command:  yarn start
+    command:  yarn web:start
     build:
       context: ""
       dockerfile: Dockerfile
     volumes:
       - '.:/app'
       - '/app/node_modules'
+      - '/app/packages/react-ui/node_modules'
     ports:
-      - '9000:9001'
+      - '3000:3001'
     environment:
       - NODE_ENV=development
       - CI=true

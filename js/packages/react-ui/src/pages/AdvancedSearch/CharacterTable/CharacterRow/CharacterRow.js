@@ -3,8 +3,9 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
 
-export const CharacterRow = ({
+const CharacterRow = ({
   character: {
     name,
     thumbnail: { extension, path },
@@ -29,3 +30,10 @@ export const CharacterRow = ({
     </TableRow>
   );
 };
+
+CharacterRow.propTypes = {
+  url: PropTypes.string,
+  character: PropTypes.object,
+};
+
+export { CharacterRow };

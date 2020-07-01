@@ -18,7 +18,7 @@ const Home = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={12}>
           <Typography variant="h2" id="title">
-            Welcome to the marvel comic explorer
+            Welcome to the Marvel comic explorer
           </Typography>
         </Grid>
         <Grid item xs={12} md={12}>
@@ -34,6 +34,12 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={12}>
           <Menu />
+        </Grid>
+        <Grid item xs={12} md={12}>
+          <Typography variant="subtitle2" id="span">
+            Any question do not be afraid to contact me at
+            well.oliveira.snt@gmail.com
+          </Typography>
         </Grid>
       </Grid>
     </div>
