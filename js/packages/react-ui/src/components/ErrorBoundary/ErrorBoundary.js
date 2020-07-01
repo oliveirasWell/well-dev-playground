@@ -3,7 +3,9 @@ import React from 'react';
 import * as Sentry from '@sentry/browser';
 
 const style = { textAlign: 'center' };
+const sadFaceEmoji = `:'(`;
 
+// Must be class
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -21,8 +23,6 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
-    const sadFaceEmoji = `:'(`;
-
     const { state, props } = this;
 
     if (state.hasError) {

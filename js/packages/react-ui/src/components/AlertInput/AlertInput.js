@@ -1,5 +1,6 @@
 import React from 'react';
 import { AlertContext } from '../../context/Alert/AlertContext';
+import { GenericInput } from '../GenericInput';
 
 const AlertInput = () => {
   const { addAlert } = React.useContext(AlertContext);
@@ -14,12 +15,11 @@ const AlertInput = () => {
   };
 
   return (
-    <>
-      <input onChange={handleChangeInput} defaultValue="" />
-      <button onClick={handleClickInput} type="button">
-        Alertar
-      </button>
-    </>
+    <GenericInput
+      handleClickInput={handleClickInput}
+      handleChangeInput={handleChangeInput}
+      buttonText="Alert"
+    />
   );
 };
 

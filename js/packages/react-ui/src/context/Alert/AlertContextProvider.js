@@ -19,7 +19,7 @@ const AlertContextProvider = ({ children }) => {
     >
       {(alerts || []).map((text, index) => (
         <Alert
-          id={`${text}-${index}`}
+          key={`${text}-${index}`}
           text={text}
           onClick={removeAlert}
           index={index}

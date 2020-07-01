@@ -3,12 +3,10 @@ import { RoutesList } from './routes/RoutesList/RoutesList';
 import { Loading } from './components/Loading';
 
 const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <Suspense fallback={<Loading />}>
-        <RoutesList />
-      </Suspense>
-    </header>
+  <div id="app">
+    <Suspense fallback={<Loading id="loading" />}>
+      <RoutesList />
+    </Suspense>
   </div>
 );
 
