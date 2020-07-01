@@ -7,7 +7,7 @@ import NotFound from '../../pages/NotFound/NotFound';
 export const RoutesList = () => (
   <ErrorBoundary>
     <Switch>
-      <Redirect exact from="/" to={routes.HOME.path} />
+      <Redirect exact from="/" to={routes.LIST.path} />
       {Object.values(routes).map(({ path, exact, component: Component }) => (
         <Route key={path} path={path} component={Component} exact={exact} />
       ))}
